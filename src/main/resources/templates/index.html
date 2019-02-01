@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{'/add'}" method="post">
+    <input type="text" th:name="username">
+    <input type="text" th:name="password">
+    <input type="text" th:name="email">
+    <input type="submit" value="Add">
+</form>
+
+<div th:each="one : ${all}"
+th:text="${one.getUsername()+' '+one.getEmail()}"
+></div>
+</body>
+</html>
