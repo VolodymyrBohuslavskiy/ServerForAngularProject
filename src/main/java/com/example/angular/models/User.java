@@ -1,6 +1,9 @@
 package com.example.angular.models;
 
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -24,6 +27,8 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String username, password, email;
+
+    @JsonIgnore
     Role role = Role.ROLE_USER;
 
     boolean isAccountNonExpired = true;
@@ -32,6 +37,7 @@ public class User implements UserDetails {
     boolean isEnabled = true;// to login must be "true"
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> list = new ArrayList<>();
         list.add(new SimpleGrantedAuthority(role.name()));
@@ -39,22 +45,27 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return isAccountNonExpired;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return isAccountNonLocked;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return isCredentialsNonExpired;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return isEnabled;
     }
+
 }

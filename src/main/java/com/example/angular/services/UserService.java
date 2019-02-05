@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class UserService implements UserDetailsService {
     @Autowired
-    UserDAO userDAO;
+    private UserDAO userDAO;
 
     public void save(User user) {
         userDAO.save(user);
@@ -21,6 +21,10 @@ public class UserService implements UserDetailsService {
 
     public List<User> findAll() {
         return userDAO.findAll();
+    }
+
+    public void delete(int id) {
+        userDAO.deleteById(id);
     }
 
     @Override
