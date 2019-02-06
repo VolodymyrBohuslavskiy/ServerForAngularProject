@@ -27,7 +27,12 @@ public class UserService implements UserDetailsService {
         userDAO.deleteById(id);
     }
 
+    public User findUserByUsernameaAndPassword(String username, String password) {
+        return userDAO.findUserByUsernameAndPassword(username, password);
+    }
+
     @Override
+
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return userDAO.findUserByUsername(s);
     }

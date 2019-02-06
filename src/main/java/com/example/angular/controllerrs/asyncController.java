@@ -32,10 +32,23 @@ public class asyncController {
 
     @PostMapping("/add")
     @CrossOrigin(origins = "*")
+//    @CrossOrigin("host") /*не працює (*/
     public void add(@RequestBody String newUser) throws IOException {
         System.out.println("Take user");
         User user = new ObjectMapper().readValue(newUser, User.class);
         userService.save(user);
     }
+
+    @PostMapping("/login")
+    @CrossOrigin(origins = "*")
+    public void logIn(@RequestBody String oneUser) throws IOException {
+        User user = new ObjectMapper().readValue(oneUser, User.class);
+        User userByUsernameAndPassword = userService.findUserByUsernameaAndPassword(user.getUsername(), user.getPassword());
+        if (userByUsernameAndPassword != null) {
+            System.out.println(userByUsernameAndPassword);
+        } else System.out.println("NONE USER WITH" + " " + user.getUsername() + " " + user.getPassword());
+
+    }
+
 
 }
