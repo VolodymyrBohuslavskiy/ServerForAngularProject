@@ -4,9 +4,8 @@ import com.example.angular.models.User;
 import com.example.angular.services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -14,6 +13,7 @@ import java.util.List;
 
 @RestController
 public class asyncController {
+
     @Autowired
     UserService userService;
 
@@ -33,9 +33,9 @@ public class asyncController {
     @PostMapping("/add")
     @CrossOrigin(origins = "*")
     public void add(@RequestBody String newUser) throws IOException {
+        System.out.println("Take user");
         User user = new ObjectMapper().readValue(newUser, User.class);
         userService.save(user);
-
     }
 
 }
